@@ -4,10 +4,12 @@
 <div class="container">
     <div class="card">
         <div class="card-header text-center">
-            <h3>Anjay mantap</h3>
+            <h3>Slebeww</h3>
         </div>
         <div class="card-body">
-            {{$products->name}}
+            Nama :{{$products->name}}<br>
+            Produk Kategori :{{$products->product_category_id}} <br>
+            Produk Kode :{{$products->product_code}}
         </div>
     </div>
 </div>

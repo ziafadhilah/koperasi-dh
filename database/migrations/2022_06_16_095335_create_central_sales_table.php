@@ -14,7 +14,10 @@ class CreateCentralSalesTable extends Migration
     public function up()
     {
         Schema::create('central_sales', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->integer('product_id');
+            $table->integer('product_category_id');
+            $table->integer('total_item')->nullable();
             $table->timestamps();
         });
     }

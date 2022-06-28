@@ -1,7 +1,7 @@
 @extends('layouts/main')
 @section('title', 'Daftar Kategori')
 @section('container')
-<div class="container mt-5">
+<div class="container mt-5 bg-light">
     <div class="card col-lg-12">
         <div class="card-header bg-primary text-white text-center">
             <h3>Form Tambah Produk</h3>

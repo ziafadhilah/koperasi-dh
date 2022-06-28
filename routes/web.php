@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CentralSaleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductCategoryController;
@@ -37,6 +38,13 @@ Route::prefix('/product-category')->group(function () {
     Route::delete('/{id}', [ProductCategoryController::class, 'destroy']);
 });
 
-Route::get('/', function () {
-    return view('welcome');
+//Route Central Sale
+Route::prefix('/central-sale')->group(function () {
+    Route::get('/', [CentralSaleController::class, 'index']);
+    Route::get('/show/{id}', [CentralSaleController::class, 'show']);
+    Route::get('/create', [CentralSaleController::class, 'create']);
+    Route::get('/edit/{id}', [CentralSaleController::class, 'edit']);
+    Route::post('/', [CentralSaleController::class, 'store']);
+    Route::patch('/{id}', [CentralSaleController::class, 'update']);
+    Route::delete('/{id}', [CentralSaleController::class, 'destroy']);
 });

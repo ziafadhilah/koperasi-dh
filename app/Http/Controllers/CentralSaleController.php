@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CentralSale;
+use Exception;
 use Illuminate\Http\Request;
 
 class CentralSaleController extends Controller
@@ -14,7 +15,9 @@ class CentralSaleController extends Controller
      */
     public function index()
     {
-        //
+        $centralSale = CentralSale::all();
+        // return $centralSale;
+        return view("/central-sale/index", compact('centralSale'));
     }
 
     /**
@@ -24,7 +27,7 @@ class CentralSaleController extends Controller
      */
     public function create()
     {
-        //
+        return view('/central-sale/create');
     }
 
     /**
@@ -35,7 +38,24 @@ class CentralSaleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'product_id' => 'required',
+            'product_category_id' => 'required',
+            'total_item' => 'required',
+        ]);
+        $centralSale = new CentralSale($request->all());
+
+        try {
+            $centralSale->save();
+            return redirect('/central-sale')->with('status', 'Data berhasil di tambahkan');
+        } catch (Exception $e) {
+            return response()->json([
+                'message' => 'Internal error',
+                'code' => 500,
+                'error' => true,
+                'errors' => $e,
+            ], 500);
+        }
     }
 
     /**
@@ -44,9 +64,11 @@ class CentralSaleController extends Controller
      * @param  \App\Models\CentralSale  $centralSale
      * @return \Illuminate\Http\Response
      */
-    public function show(CentralSale $centralSale)
+    public function show($id)
     {
-        //
+        return view('/central-sale/show', [
+            'centralSale' => CentralSale::findOrFail($id)
+        ]);
     }
 
     /**

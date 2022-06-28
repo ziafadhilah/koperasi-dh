@@ -1,7 +1,7 @@
 @extends('layouts/main')
 @section('title', 'Daftar Kategori')
 @section('container')
-<div class="container mt-5">
+<div class="height-100" id="product-category">
     @if (session('status'))
     <div class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
         {{ session('status') }}
