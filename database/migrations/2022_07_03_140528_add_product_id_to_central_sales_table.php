@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCentralSalesTable extends Migration
+class AddProductIdToCentralSalesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateCentralSalesTable extends Migration
      */
     public function up()
     {
-        Schema::create('central_sales', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('pay_amount');
-            $table->integer('qty')->nullable();
-            $table->timestamps();
+        Schema::table('central_sales', function (Blueprint $table) {
+            $table->foreignId('product_id')->after('id');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateCentralSalesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('central_sales');
+        Schema::table('central_sales', function (Blueprint $table) {
+            $table->foreignId('product_id')->after('id');
+        });
     }
 }

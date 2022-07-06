@@ -39,20 +39,20 @@
                     <div class="col-lg-4">
                         <input type="text" class="form-control" name="size" placeholder="Ukuran" value="{{$products->size}}">
                     </div>
-                    <label class="col-sm-2 col-form-label">Harga Beli</label>
+                    <!-- <label class="col-sm-2 col-form-label">Harga Beli</label>
                     <div class="col-lg-4">
                         <input type="number" class="form-control" name="purchase_price" placeholder="Harga Beli" value="{{$products->purchase_price}}">
-                    </div>
+                    </div> -->
                 </div>
                 <div class="mb-3 row">
                     <label class="col-sm-2 col-form-label">Stok</label>
                     <div class="col-lg-4">
                         <input type="number" class="form-control" name="stock" placeholder="Stok" value="{{$products->stock}}">
                     </div>
-                    <label class="col-sm-2 col-form-label">Harga Jual</label>
+                    <!-- <label class="col-sm-2 col-form-label">Harga Jual</label>
                     <div class="col-lg-4">
                         <input type="number" class="form-control" name="selling_price" placeholder="Harga Jual" value="{{$products->selling_price}}">
-                    </div>
+                    </div> -->
                 </div>
                 <div class="mb-3 row">
                     <div class="col-lg-2">

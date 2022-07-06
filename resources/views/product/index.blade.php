@@ -1,7 +1,7 @@
 @extends('layouts/main')
 @section('title', 'Daftar Produk')
 @section('container')
-<div class="height-100">
+<div class="container mt-5">
     @if (session('status'))
     <div class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
         {{ session('status') }}
@@ -13,13 +13,12 @@
         <thead class="text-center table-header">
             <tr class="bg-dark text-white">
                 <th scope="col" width="5%">No</th>
-                <th scope="col">Kode Produk</th>
                 <th scope="col">Kategori</th>
                 <th scope="col">Nama</th>
                 <th scope="col">Ukuran</th>
                 <th scope="col">Stok</th>
-                <th scope="col">Harga Beli</th>
-                <th scope="col">Harga Jual</th>
+                <!-- <th scope="col">Harga Beli</th>
+                <th scope="col">Harga Jual</th> -->
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -27,13 +26,12 @@
             @foreach($products as $product)
             <tr>
                 <th scope="row">{{$loop->iteration}}</th>
-                <td>{{$product->product_code}}</td>
                 <td>{{$product->productCategory->name}}</td>
                 <td>{{$product->name}}</td>
                 <td>{{$product->size}}</td>
                 <td>{{$product->stock}}</td>
-                <td>{{number_format($product->purchase_price,0,',','.')}}</td>
-                <td>{{number_format($product->selling_price,0,',','.')}}</td>
+                <!-- <td>{{number_format($product->purchase_price,0,',','.')}}</td>
+                <td>{{number_format($product->selling_price,0,',','.')}}</td> -->
                 <td class="w-25">
                     <!-- Trigger modal -->
                     <a href="{{url('/product/show',$product->id)}}" class="btn btn-outline-primary btn-sm fa fa-eye"></a>

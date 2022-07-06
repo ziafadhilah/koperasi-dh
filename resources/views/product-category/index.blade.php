@@ -1,7 +1,7 @@
 @extends('layouts/main')
 @section('title', 'Daftar Kategori')
 @section('container')
-<div class="height-100" id="product-category">
+<div class="container mt-5" id="product-category">
     @if (session('status'))
     <div class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
         {{ session('status') }}
@@ -22,7 +22,7 @@
             @foreach($categories as $category)
             <tr>
                 <th scope="row">{{$loop->iteration}}</th>
-                <td>{{$category->category_code}}</td>
+                <td>{{$category->code}}</td>
                 <td>{{$category->name}}</td>
                 <td class="w-25">
                     <!-- Trigger modal -->

@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PurchaseTransaction;
 use Illuminate\Http\Request;
 
-class PurchaseTransactionController extends Controller
+class CentralPurchaseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +40,10 @@ class PurchaseTransactionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\PurchaseTransaction  $purchaseTransaction
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(PurchaseTransaction $purchaseTransaction)
+    public function show($id)
     {
         //
     }
@@ -52,10 +51,10 @@ class PurchaseTransactionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\PurchaseTransaction  $purchaseTransaction
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(PurchaseTransaction $purchaseTransaction)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +63,10 @@ class PurchaseTransactionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PurchaseTransaction  $purchaseTransaction
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PurchaseTransaction $purchaseTransaction)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +74,10 @@ class PurchaseTransactionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\PurchaseTransaction  $purchaseTransaction
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PurchaseTransaction $purchaseTransaction)
+    public function destroy($id)
     {
         //
     }

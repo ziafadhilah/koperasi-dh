@@ -12,7 +12,7 @@
                 <div class="mb-3 row">
                     <label class="col-sm-2 col-form-label">Kode Kategori</label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="category_code" placeholder="Kode Kategori">
+                        <input type="text" class="form-control" name="code" placeholder="Kode Kategori">
                     </div>
                 </div>
                 <div class="mb-3 row">

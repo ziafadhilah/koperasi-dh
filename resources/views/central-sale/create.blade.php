@@ -12,19 +12,44 @@
                 <div class="mb-3 row">
                     <label class="col-sm-2 col-form-label">Nama Produk</label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="product_id" placeholder="Nama Produk">
+                        <select class="form-select form-select-md" aria-label=".form-select-md example" name="product_id">
+                            <option selected class="text-center">-- Pilih Produk --</option>
+                            @foreach($product as $products)
+                            <option value="{{$products->id}}">{{$products->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
+                    <!-- <div class="col-lg-4">
+                        <select class="form-select" id="select-tags" multiple placeholder="Nama Produk">
+                            <optgroup label="Ketik Untuk Mencari Produk" name="product_id">
+                                @foreach($product as $products)
+                                <option value="{{$products->name}}"></option>
+                                @endforeach
+                            </optgroup>
+                        </select>
+                    </div> -->
                 </div>
                 <div class="mb-3 row">
                     <label class="col-sm-2 col-form-label">Kategori</label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="product_category_id" placeholder=" Kategori">
+                        <select class="form-select form-select-md" aria-label=".form-select-md example" name="product_category_id">
+                            <option selected class="text-center">-- Pilih Kategori --</option>
+                            @foreach($productCategories as $productCategory)
+                            <option value="{{$productCategory->id}}">{{$productCategory->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Harga Jual</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" name="pay_amount" placeholder="Harga Jual">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label class="col-sm-2 col-form-label">Terjual</label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="total_item" placeholder="Total Terjual">
+                        <input type="text" class="form-control" name="qty" placeholder="Total Terjual">
                     </div>
                 </div>
                 <div class="mb-3 row">
@@ -40,4 +65,24 @@
         </div>
     </div>
 </div>
+@endsection
+@section('pagescript')
+<script>
+    new TomSelect("#select-tags", {
+        plugins: ['remove_button'],
+        create: true,
+        // onItemAdd: function() {
+        //     this.setTextboxValue('');
+        //     this.refreshOptions();
+        // },
+        render: {
+            option: function(data, escape) {
+                return '<div class="d-flex"><span>' + escape(data.value) + '</span><span class="ms-auto text-muted">' + '</span></div>';
+            },
+            item: function(data, escape) {
+                return '<div>' + escape(data.value) + '</div>';
+            }
+        }
+    });
+</script>
 @endsection

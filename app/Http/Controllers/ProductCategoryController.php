@@ -15,7 +15,7 @@ class ProductCategoryController extends Controller
     public function index()
     {
         $categories = ProductCategory::all();
-        return view("/product-category/index", compact('categories'));
+        return view('/product-category/index', compact('categories'));
     }
 
     /**
@@ -25,7 +25,7 @@ class ProductCategoryController extends Controller
      */
     public function create()
     {
-        return view("/product-category/create");
+        return view('/product-category/create');
     }
 
     /**
@@ -37,11 +37,14 @@ class ProductCategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category_code' => 'required',
+            'code' => 'required',
             'name' => 'required',
         ]);
         ProductCategory::create($request->all());
-        return redirect('/product-category')->with('status', 'Data telah di tambahkan');
+        return redirect('/product-category')->with(
+            'status',
+            'Data telah di tambahkan'
+        );
     }
 
     /**
@@ -53,7 +56,7 @@ class ProductCategoryController extends Controller
     public function show($id)
     {
         return view('/product-category/show', [
-            'categories' => ProductCategory::findOrFail($id)
+            'categories' => ProductCategory::findOrFail($id),
         ]);
     }
 
@@ -67,7 +70,7 @@ class ProductCategoryController extends Controller
     {
         $categories = ProductCategory::findOrFail($id);
         return view('/product-category/edit', [
-            'categories' => $categories
+            'categories' => $categories,
         ]);
     }
 
@@ -80,12 +83,14 @@ class ProductCategoryController extends Controller
      */
     public function update(Request $request, ProductCategory $id)
     {
-        ProductCategory::where('id', $id->id)
-            ->update([
-                'category_code' => $request->category_code,
-                'name' => $request->name,
-            ]);
-        return redirect('/product-category')->with('status', 'Berhasil di ubah');
+        ProductCategory::where('id', $id->id)->update([
+            'code' => $request->code,
+            'name' => $request->name,
+        ]);
+        return redirect('/product-category')->with(
+            'status',
+            'Berhasil di ubah'
+        );
     }
 
     /**
@@ -97,6 +102,9 @@ class ProductCategoryController extends Controller
     public function destroy(ProductCategory $id)
     {
         ProductCategory::destroy($id->id);
-        return redirect('/product-category')->with('status', 'Data telah terhapus!');
+        return redirect('/product-category')->with(
+            'status',
+            'Data telah terhapus!'
+        );
     }
 }

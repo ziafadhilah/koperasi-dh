@@ -42,26 +42,32 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'product_code' => 'required',
             'product_category_id' => 'required',
             'name' => 'required',
             'size' => 'required',
             'stock' => 'required',
-            'purchase_price' => 'required',
-            'selling_price' => 'required',
         ]);
-        $product = new Product($request->all());
-
+        $product = new Product();
+        $product->product_category_id = $request->product_category_id;
+        $product->name = $request->name;
+        $product->size = $request->size;
+        $product->stock = $request->stock;
         try {
             $product->save();
-            return redirect('/product')->with('status', 'Data berhasil di tambahkan');
+            return redirect('/product')->with(
+                'status',
+                'Data berhasil di tambahkan'
+            );
         } catch (Exception $e) {
-            return response()->json([
-                'message' => 'Internal error',
-                'code' => 500,
-                'error' => true,
-                'errors' => $e,
-            ], 500);
+            return response()->json(
+                [
+                    'message' => 'Internal error',
+                    'code' => 500,
+                    'error' => true,
+                    'errors' => $e,
+                ],
+                500
+            );
         }
     }
 
@@ -128,12 +134,15 @@ class ProductController extends Controller
             $product->save();
             return redirect('/product')->with('status', 'Berhasil di ubah');
         } catch (Exception $e) {
-            return response()->json([
-                'message' => 'Internal error',
-                'code' => 500,
-                'error' => true,
-                'errors' => $e,
-            ], 500);
+            return response()->json(
+                [
+                    'message' => 'Internal error',
+                    'code' => 500,
+                    'error' => true,
+                    'errors' => $e,
+                ],
+                500
+            );
         }
     }
 

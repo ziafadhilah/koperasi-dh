@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\CentralSale;
+use App\Models\Product;
+use App\Models\ProductCategory;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -17,7 +19,7 @@ class CentralSaleController extends Controller
     {
         $centralSale = CentralSale::all();
         // return $centralSale;
-        return view("/central-sale/index", compact('centralSale'));
+        return view('/central-sale/index', compact('centralSale'));
     }
 
     /**
@@ -27,7 +29,12 @@ class CentralSaleController extends Controller
      */
     public function create()
     {
-        return view('/central-sale/create');
+        $product = Product::all();
+        $productCategories = ProductCategory::all();
+        return view('/central-sale/create', [
+            'product' => $product,
+            'productCategories' => $productCategories,
+        ]);
     }
 
     /**
@@ -38,23 +45,29 @@ class CentralSaleController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'product_id' => 'required',
-            'product_category_id' => 'required',
-            'total_item' => 'required',
-        ]);
-        $centralSale = new CentralSale($request->all());
+        $centralSale = new CentralSale();
+        $centralSale->product_id = $request->product_id;
+        $centralSale->product_category_id = $request->product_category_id;
+        $centralSale->pay_amount = $request->pay_amount;
+        $centralSale->qty = $request->qty;
 
+        dd($request->all());
         try {
             $centralSale->save();
-            return redirect('/central-sale')->with('status', 'Data berhasil di tambahkan');
+            return redirect('/central-sale')->with(
+                'status',
+                'Data berhasil di tambahkan'
+            );
         } catch (Exception $e) {
-            return response()->json([
-                'message' => 'Internal error',
-                'code' => 500,
-                'error' => true,
-                'errors' => $e,
-            ], 500);
+            return response()->json(
+                [
+                    'message' => 'Internal error',
+                    'code' => 500,
+                    'error' => true,
+                    'errors' => $e,
+                ],
+                500
+            );
         }
     }
 
@@ -67,7 +80,7 @@ class CentralSaleController extends Controller
     public function show($id)
     {
         return view('/central-sale/show', [
-            'centralSale' => CentralSale::findOrFail($id)
+            'centralSale' => CentralSale::findOrFail($id),
         ]);
     }
 
