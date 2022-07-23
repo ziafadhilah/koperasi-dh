@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CentralSaleController extends Controller
 {
@@ -17,9 +18,9 @@ class CentralSaleController extends Controller
      */
     public function index()
     {
-        $centralSale = CentralSale::all();
-        // return $centralSale;
-        return view('/central-sale/index', compact('centralSale'));
+        $getProduct = CentralSale::with('product', 'productCategory')->get();
+        // return $getProduct;
+        return view('/central-sale/index', compact('getProduct'));
     }
 
     /**
@@ -29,11 +30,11 @@ class CentralSaleController extends Controller
      */
     public function create()
     {
-        $product = Product::all();
-        $productCategories = ProductCategory::all();
+        $getProduct = Product::all();
+        $getProductCategories = ProductCategory::all();
         return view('/central-sale/create', [
-            'product' => $product,
-            'productCategories' => $productCategories,
+            'getProduct' => $getProduct,
+            'getProductCategories' => $getProductCategories,
         ]);
     }
 
@@ -45,20 +46,31 @@ class CentralSaleController extends Controller
      */
     public function store(Request $request)
     {
-        $centralSale = new CentralSale();
-        $centralSale->product_id = $request->product_id;
-        $centralSale->product_category_id = $request->product_category_id;
-        $centralSale->pay_amount = $request->pay_amount;
-        $centralSale->qty = $request->qty;
+        DB::beginTransaction();
 
-        dd($request->all());
         try {
+            $centralSale = new CentralSale();
+            $centralSale->product_id = $request->product_id;
+            $centralSale->product_category_id = $request->product_category_id;
+            $centralSale->pay_amount = $request->pay_amount;
+            $centralSale->qty = $request->qty;
             $centralSale->save();
+
+            $getProduct = Product::select('stock')->where('id', $centralSale->product_id)->get();
+            $finalData = $getProduct[0]->stock - ($request->qty);
+
+            $get_id = $centralSale->product_id;
+
+            $updateStock = Product::find($get_id);
+            $updateStock->stock = $finalData;
+            $updateStock->save();
+            DB::commit();
             return redirect('/central-sale')->with(
                 'status',
                 'Data berhasil di tambahkan'
             );
         } catch (Exception $e) {
+            DB::rollback();
             return response()->json(
                 [
                     'message' => 'Internal error',
@@ -66,7 +78,6 @@ class CentralSaleController extends Controller
                     'error' => true,
                     'errors' => $e,
                 ],
-                500
             );
         }
     }
@@ -90,7 +101,7 @@ class CentralSaleController extends Controller
      * @param  \App\Models\CentralSale  $centralSale
      * @return \Illuminate\Http\Response
      */
-    public function edit(CentralSale $centralSale)
+    public function edit(Request $request)
     {
         //
     }
@@ -113,8 +124,9 @@ class CentralSaleController extends Controller
      * @param  \App\Models\CentralSale  $centralSale
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CentralSale $centralSale)
+    public function destroy(Request $id)
     {
-        //
+        CentralSale::destroy($id->id);
+        return redirect('/central-sale')->with('status', 'Data telah terhapus!');
     }
 }

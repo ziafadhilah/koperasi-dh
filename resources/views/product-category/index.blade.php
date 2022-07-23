@@ -8,14 +8,16 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
-    <a href="{{url('/product-category/create')}}" class="btn btn-outline-success"><i class="fa fa-plus">&nbsp; Tambah Baru</i></a>
-    <table id="myTable" class="table table-striped mt-3">
-        <thead class="text-center table-header">
-            <tr class="bg-dark text-white">
-                <th scope="col" width="10%">No</th>
-                <th scope="col" width="30%">Kode Kategori</th>
-                <th scope="col">Nama</th>
-                <th scope="col">Action</th>
+    <div class="mb-3">
+        <a href="{{url('/product-category/create')}}" class="btn btn-outline-success"><i class="fa fa-plus">&nbsp; Tambah Baru</i></a>
+    </div>
+    <table id="product_category" class="table table-striped mt-3">
+        <thead class="table-header">
+            <tr>
+                <th class="text-center" scope="col" width="10%">No</th>
+                <th class="text-center" scope="col" width="30%">Kode Kategori</th>
+                <th class="text-center" scope="col">Nama</th>
+                <th class="text-center" scope="col">Action</th>
             </tr>
         </thead>
         <tbody class="text-center">
@@ -48,3 +50,13 @@
         top: 0;
     }
 </style>
+@section('pagescript')
+<script>
+    $(document).ready(function() {
+        $('#product_category').DataTable({
+            paging: false,
+            bInfo: false,
+        });
+    });
+</script>
+@endsection

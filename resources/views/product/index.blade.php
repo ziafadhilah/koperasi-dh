@@ -8,18 +8,18 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
-    <a href="{{url('/product/create')}}" class="btn btn-outline-success"><i class="fa fa-plus">&nbsp; Tambah Baru</i></a>
-    <table id="myTable" class="table table-striped mt-3">
-        <thead class="text-center table-header">
-            <tr class="bg-dark text-white">
-                <th scope="col" width="5%">No</th>
-                <th scope="col">Kategori</th>
-                <th scope="col">Nama</th>
-                <th scope="col">Ukuran</th>
-                <th scope="col">Stok</th>
-                <!-- <th scope="col">Harga Beli</th>
-                <th scope="col">Harga Jual</th> -->
-                <th scope="col">Action</th>
+    <div class="mb-3">
+        <a href="{{url('/product/create')}}" class="btn btn-outline-success"><i class="fa fa-plus">&nbsp; Tambah Baru</i></a>
+    </div>
+    <table class="table table-striped mt-3" id="product_table">
+        <thead class="table-header">
+            <tr>
+                <th class="text-center" scope="col" width="5%">No</th>
+                <th class="text-center" scope="col">Kategori</th>
+                <th class="text-center" scope="col">Nama</th>
+                <th class="text-center" scope="col">Ukuran</th>
+                <th class="text-center" scope="col">Stok</th>
+                <th class="text-center" scope="col">Action</th>
             </tr>
         </thead>
         <tbody class="text-center">
@@ -56,3 +56,13 @@
         top: 0;
     }
 </style>
+@section('pagescript')
+<script>
+    $(document).ready(function() {
+        $('#product_table').DataTable({
+            paging: false,
+            bInfo: false,
+        });
+    });
+</script>
+@endsection

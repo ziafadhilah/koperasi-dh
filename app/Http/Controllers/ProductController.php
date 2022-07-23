@@ -27,9 +27,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $productCategories = ProductCategory::all();
+        $getProductCategory = ProductCategory::all();
         return view('/product/create', [
-            'productCategories' => $productCategories,
+            'getProductCategory' => $getProductCategory,
         ]);
     }
 
@@ -111,26 +111,13 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'product_code' => 'required',
-            'product_category_id' => 'required',
-            'name' => 'required',
-            'size' => 'required',
-            'stock' => 'required',
-            'purchase_price' => 'required',
-            'selling_price' => 'required',
-        ]);
-
-        $product = Product::find($id);
-        $product->product_code = $request->product_code;
-        $product->product_category_id = $request->product_category_id;
-        $product->name = $request->name;
-        $product->size = $request->size;
-        $product->stock = $request->stock;
-        $product->purchase_price = $request->purchase_price;
-        $product->selling_price = $request->selling_price;
 
         try {
+            $product = Product::find($id);
+            $product->product_category_id = $request->product_category_id;
+            $product->name = $request->name;
+            $product->size = $request->size;
+            $product->stock = $request->stock;
             $product->save();
             return redirect('/product')->with('status', 'Berhasil di ubah');
         } catch (Exception $e) {
@@ -152,7 +139,7 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $id)
+    public function destroy(Request $id)
     {
         Product::destroy($id->id);
         return redirect('/product')->with('status', 'Data telah terhapus!');
