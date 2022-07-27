@@ -9,12 +9,12 @@
     </div>
     @endif
     <div class="mb-3">
-        <a href="{{url('/central-sale/create')}}" class="btn btn-outline-success">
+        <a href="{{url('/central-purchase/create')}}" class="btn btn-outline-success">
             <i class="fa fa-plus">&nbsp; Tambah Baru</i>
         </a>
     </div>
     <div class="table-responsive">
-        <table class="table display" id="central-sale">
+        <table class="table display" id="central-purchase">
             <thead>
                 <tr>
                     <th class="text-center" scope="col" width="5%">No</th>
@@ -34,14 +34,14 @@
                     <td>{{$cs->product->size}}</td>
                     <td>{{$cs->qty}}</td>
                     <td>
-                        <a href="{{url('/central-sale/show',$cs->id)}}" class="btn btn-outline-primary btn-sm fa fa-eye"></a>
-                        <form action="/central-sale/{{$cs->id}}" method="post" class="d-inline">
+                        <a href="{{url('/central-purchase/show',$cs->id)}}" class="btn btn-outline-primary btn-sm fa fa-eye"></a>
+                        <form action="/central-purchase/{{$cs->id}}" method="post" class="d-inline">
                             @method('delete')
                             @csrf
                             <button type="submit" class="btn btn-outline-danger btn-sm fa fa-trash" onclick="return confirm('Anda yakin ingin menghapus?')">
                             </button>
                         </form>
-                        <a href="{{url('/central-sale/edit',$cs->id)}}" class="btn btn-outline-warning btn-sm fa fa-edit d-inline"></a>
+                        <a href="{{url('/central-purchase/edit',$cs->id)}}" class="btn btn-outline-warning btn-sm fa fa-edit d-inline"></a>
                     </td>
                 </tr>
                 @endforeach
@@ -53,9 +53,9 @@
 @section('pagescript')
 <script>
     $(document).ready(function() {
-        $('#central-sale').DataTable({
+        $('#central-purchase').DataTable({
             paging: false,
-            "bInfo": false
+            bInfo: false,
         });
     });
 </script>

@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CentralPurchase;
-use App\Models\Product;
-use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
-class CentralPurchaseController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +13,7 @@ class CentralPurchaseController extends Controller
      */
     public function index()
     {
-        $getProduct = CentralPurchase::with('product', 'productCategory')->get();
-        // return $getProduct;
-        return view('/central-purchase/index', compact('getProduct'));
+        return view('login');
     }
 
     /**
@@ -28,12 +23,7 @@ class CentralPurchaseController extends Controller
      */
     public function create()
     {
-        $getProduct = Product::all();
-        $getProductCategories = ProductCategory::all();
-        return view('/central-purchase/create', [
-            'getProduct' => $getProduct,
-            'getProductCategories' => $getProductCategories,
-        ]);
+        //
     }
 
     /**
