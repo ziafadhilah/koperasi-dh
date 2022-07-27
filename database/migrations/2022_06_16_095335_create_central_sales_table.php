@@ -18,7 +18,6 @@ class CreateCentralSalesTable extends Migration
             $table->integer('pay_amount');
             $table->integer('qty')->nullable();
             $table->integer('price')->nullable();
-            $table->integer('qty')->nullable();
             $table->timestamps();
         });
     }
