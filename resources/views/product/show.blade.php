@@ -7,9 +7,9 @@
             <h3>Slebeww</h3>
         </div>
         <div class="card-body">
-            Nama :{{$products->name}}<br>
-            Produk Kategori :{{$products->product_category_id}} <br>
-            Produk Kode :{{$products->product_code}}
+            Nama :{{$products->name ?? '-'}}<br>
+            Produk Kategori :{{$products->product_category_id ?? '-'}} <br>
+            Produk Kode :{{$products->product_code ?? '-'}}
         </div>
     </div>
 </div>

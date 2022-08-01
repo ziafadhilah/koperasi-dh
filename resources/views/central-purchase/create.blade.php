@@ -15,7 +15,7 @@
                         <select class="form-select form-select-md" aria-label=".form-select-md example" name="product_category_id">
                             <option selected class="text-center">-- Pilih Kategori --</option>
                             @foreach($getProductCategories as $gpc)
-                            <option value="{{$gpc->id}}">{{$gpc->name}}</option>
+                            <option value="{{$gpc->id}}">{{$gpc->name ?? '-'}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -26,7 +26,7 @@
                         <select class="form-select form-select-md text-center" aria-label=".form-select-md example" name="product_id">
                             <option selected>-- Pilih Produk --</option>
                             @foreach($getProduct as $gp)
-                            <option value="{{$gp->id}}">{{$gp->name}} ({{$gp->size}})</option>
+                            <option value="{{$gp->id}}">{{$gp->name ?? '-'}} ({{$gp->size ?? '-'}})</option>
                             @endforeach
                         </select>
                     </div>
@@ -42,7 +42,7 @@
                     <div class="col-lg-4">
                         <input type="text" class="form-control" name="qty" placeholder="Total Pembelian" autocomplete="off">
                     </div>
-                    <label class="col-sm-2 col-form-label">Stock Gudang : {{$gp->stock}}</label>
+                    <label class="col-sm-2 col-form-label">Stock Gudang : {{$gp->stock ?? '-'}}</label>
                 </div>
                 <div class="mb-3 row">
                     <div class="col-lg-2">

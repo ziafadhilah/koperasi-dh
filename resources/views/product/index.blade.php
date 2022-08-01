@@ -26,16 +26,14 @@
             @foreach($products as $product)
             <tr>
                 <th scope="row">{{$loop->iteration}}</th>
-                <td>{{$product->productCategory->name}}</td>
-                <td>{{$product->name}}</td>
-                <td>{{$product->size}}</td>
-                <td>{{$product->stock}}</td>
+                <td>{{$product->productCategory->name ?? '-'}}</td>
+                <td>{{$product->name ?? '-'}}</td>
+                <td>{{$product->size ?? '-'}}</td>
+                <td>{{$product->stock ?? '-'}}</td>
                 <!-- <td>{{number_format($product->purchase_price,0,',','.')}}</td>
                 <td>{{number_format($product->selling_price,0,',','.')}}</td> -->
                 <td class="w-25">
-                    <!-- Trigger modal -->
                     <a href="{{url('/product/show',$product->id)}}" class="btn btn-outline-primary btn-sm fa fa-eye"></a>
-                    <!-- Close modal -->
                     <form action="/product/{{$product->id}}" method="post" class="d-inline">
                         @method('delete')
                         @csrf

@@ -29,10 +29,10 @@
                 @foreach($getProduct as $cs)
                 <tr>
                     <th scope="row">{{$loop->iteration}}</th>
-                    <td>{{$cs->productCategory->name}}</td>
-                    <td>{{$cs->product->name}}</td>
-                    <td>{{$cs->product->size}}</td>
-                    <td>{{$cs->qty}}</td>
+                    <td>{{$cs->productCategory->name ?? '-'}}</td>
+                    <td>{{$cs->product->name ?? '-'}}</td>
+                    <td>{{$cs->product->size ?? '-'}}</td>
+                    <td>{{$cs->qty ?? '-'}}</td>
                     <td>
                         <a href="{{url('/central-purchase/show',$cs->id)}}" class="btn btn-outline-primary btn-sm fa fa-eye"></a>
                         <form action="/central-purchase/{{$cs->id}}" method="post" class="d-inline">

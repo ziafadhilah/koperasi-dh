@@ -15,7 +15,7 @@
                         <select class="form-select form-select-md" aria-label=".form-select-md example" name="product_category_id">
                             <option selected class="text-center">-- Pilih Kategori --</option>
                             @foreach($getProductCategory as $gp)
-                            <option value="{{$gp->id}}">{{$gp->name}}</option>
+                            <option value="{{$gp->id}}">{{$gp->name ?? '-'}}</option>
                             @endforeach
                         </select>
                     </div>

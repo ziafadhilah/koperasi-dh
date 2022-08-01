@@ -4,7 +4,7 @@
 <div class="container mt-5">
     <div class="card col-lg-12">
         <div class="card-header bg-primary text-white text-center">
-            <h3>Ubah Produk : {{$products->name}}</h3>
+            <h3>Ubah Produk : {{$products->name ?? '-'}}</h3>
         </div>
         <form method="post" action="/product/{{$products->id}}">
             @method('patch')
