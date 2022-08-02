@@ -12,13 +12,13 @@
                 <div class="mb-3 row">
                     <label class="col-sm-2 col-form-label">Kode Kategori</label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="code" placeholder="Kode Kategori">
+                        <input type="text" class="form-control" name="code" placeholder="Kode Kategori" autocomplete="off" required>
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label class="col-sm-2 col-form-label">Nama Kategori</label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="name" placeholder="Nama Kategori">
+                        <input type="text" class="form-control" name="name" placeholder="Nama Kategori" autocomplete="off" required>
                     </div>
                 </div>
                 <div class="mb-3 row">

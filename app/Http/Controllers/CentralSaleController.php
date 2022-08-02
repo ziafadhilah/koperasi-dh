@@ -31,6 +31,7 @@ class CentralSaleController extends Controller
     public function create()
     {
         $getProduct = Product::all();
+        // return $getProduct;
         $getProductCategories = ProductCategory::all();
         return view('/central-sale/create', [
             'getProduct' => $getProduct,
