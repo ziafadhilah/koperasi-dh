@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <style>
         /* Importing fonts from Google */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
@@ -114,7 +114,7 @@
             }
         }
     </style>
-    <title>LOGIN</title>
+    <title>REGISTER</title>
 </head>
 
 <body>
@@ -125,26 +125,40 @@
         <div class="text-center mt-4 name">
             WARDAH
         </div>
-        <form class="p-3 mt-3" method="post" action="{{ route('login.perform') }}">
+        <form class="p-3 mt-3" method="post" action="{{route('register.perform')}}">
             @csrf
             <div class="form-field d-flex align-items-center">
+                <span class="far fa-envelope"></span>
+                <input type="email" name="email" placeholder="example@gmail.com" required autofocus autocomplete="off">
+                @if ($errors->has('email'))
+                <span class="text-danger text-left">{{ $errors->first('email') }}</span>
+                @endif
+            </div>
+            <div class="form-field d-flex align-items-center">
                 <span class="far fa-user"></span>
-                <input type="text" name="username" id="userName" placeholder="Username">
+                <input type="text" name="username" placeholder="Username" required autofocus autocomplete="off">
                 @if ($errors->has('username'))
                 <span class="text-danger text-left">{{ $errors->first('username') }}</span>
                 @endif
             </div>
             <div class="form-field d-flex align-items-center">
                 <span class="fas fa-key"></span>
-                <input type="password" name="password" id="pwd" placeholder="Password">
+                <input type="password" name="password" placeholder="Password">
                 @if ($errors->has('password'))
                 <span class="text-danger text-left">{{ $errors->first('password') }}</span>
                 @endif
             </div>
-            <button class="btn mt-3" type="submit">Login</button>
+            <div class="form-field d-flex align-items-center">
+                <span class="fas fa-key"></span>
+                <input type="password" name="password_confirmation" placeholder="Password">
+                @if ($errors->has('password_confirmation'))
+                <span class="text-danger text-left">{{ $errors->first('password_confirmation') }}</span>
+                @endif
+            </div>
+            <button class="btn mt-3" type="submit">Daftar</button>
         </form>
         <div class="text-center fs-6">
-            <a href="#">Belum punya akun?</a> Daftar <a href="{{route('register.perform')}}">disini</a>
+            <a href="#">Sudah punya akun?</a> Login <a href="{{route('login.perform')}}">Disini</a>
         </div>
     </div>
 </body>
