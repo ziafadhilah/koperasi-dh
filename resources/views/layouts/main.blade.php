@@ -23,9 +23,11 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="{{url('/product')}}">Darul Hikam</a>
+            <a class="navbar-brand me-2" href="https://mdbgo.com/">
+                <img src="{{URL::asset('images/logoDH.png')}}" height="50" alt="MDB Logo" loading="lazy" style="margin-top: -1px;" />
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -44,6 +46,12 @@
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="{{url('/central-purchase')}}">Pembelian</a>
                         </li>
+                        @auth
+                        {{auth()->user()->name}}
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{{ route('logout.perform') }}"><i class="fa fa-power-off"></i></a>
+                        </li>
+                        @endauth
                     </ul>
                 </div>
             </div>

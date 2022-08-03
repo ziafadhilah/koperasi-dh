@@ -2,8 +2,7 @@
 
 use App\Http\Controllers\CentralPurchaseController;
 use App\Http\Controllers\CentralSaleController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\PagesController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductCategoryController;
@@ -18,6 +17,29 @@ use App\Http\Controllers\ProductCategoryController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::group(['namespace' => 'App\Http\Controllers'], function () {
+    Route::group(['middleware' => ['guest']], function () {
+        /**
+         * Register Routes
+         */
+        Route::get('/register', 'RegisterController@show')->name('register.show');
+        Route::post('/register', 'RegisterController@register')->name('register.perform');
+
+        /**
+         * Login Routes
+         */
+        Route::get('/login', 'LoginController@show')->name('login.show');
+        Route::post('/login', 'LoginController@login')->name('login.perform');
+    });
+
+    Route::group(['middleware' => ['auth']], function () {
+        /**
+         * Logout Routes
+         */
+        Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
+    });
+});
 
 Route::middleware(['auth'])->group(function () {
 
@@ -69,7 +91,7 @@ Route::middleware(['auth'])->group(function () {
 // login
 
 Route::prefix('/')->group(function () {
-    Route::get('/', [PagesController::class, 'index'])->middleware('guest')->name('login');
+    Route::get('/', [LoginController::class, 'show'])->middleware('guest')->name('login');
     // Route::post('/action/authenticate', [LoginController::class, 'authenticate']);
     // Route::get('/action/logout', [LoginController::class, 'logout']);
 });
