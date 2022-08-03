@@ -22,6 +22,7 @@
                     <th class="text-center" scope="col">Produk</th>
                     <th class="text-center" scope="col">Ukuran</th>
                     <th class="text-center" scope="col">Total Terjual</th>
+                    <th class="text-center" scope="col">Tanggal Terjual</th>
                     <th class="text-center" scope="col">Action</th>
                 </tr>
             </thead>
@@ -33,6 +34,7 @@
                     <td>{{$cs->product->name ?? '-'}}</td>
                     <td>{{$cs->product->size ?? '-'}}</td>
                     <td>{{$cs->qty ?? '-'}}</td>
+                    <td>{{date_format($cs->created_at ?? '-', 'd/M/Y')}}</td>
                     <td>
                         <a href="{{url('/central-sale/show',$cs->id)}}" class="btn btn-outline-primary btn-sm fa fa-eye"></a>
                         <form action="/central-sale/{{$cs->id}}" method="post" class="d-inline">

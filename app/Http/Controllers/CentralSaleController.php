@@ -102,9 +102,13 @@ class CentralSaleController extends Controller
      * @param  \App\Models\CentralSale  $centralSale
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit($id)
     {
-        //
+        $centralSale = CentralSale::findOrFail($id);
+        return $centralSale;
+        return view('/central-sale', [
+            'centralSale' => $centralSale,
+        ]);
     }
 
     /**

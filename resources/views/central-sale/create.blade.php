@@ -25,23 +25,23 @@
                         <label class="col-sm-2 col-form-label">Produk</label>
                         <div class="col-lg-4">
                             <select class="form-select form-select-md" aria-label=".form-select-md example" v-model="productId" required>
-                                <option selected class="text-center" value="0">-- Pilih Produk --</option>
-                                <option v-for="products in product" v-if="products.product_category_id == categoryId" :value="products.id">@{{products.name}}</option>
+                                <option v-for="products in product" v-if="products.product_category_id == categoryId" :value="products.id">@{{products.name}} : @{{products.size}}</option>
                             </select>
                         </div>
                     </div>
-                    <div class="mb-3 row">
-                        <label class="col-sm-2 col-form-label">Harga Jual</label>
-                        <div class="col-lg-4">
-                            <input type="text" class="form-control" v-model="pay_amount" placeholder="Harga Jual" autocomplete="off">
+                    <div v-if="categoryId == 1 || categoryId == 2 || categoryId == 3 ">
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 col-form-label">Harga Jual</label>
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" v-model="pay_amount" placeholder="Harga Jual" autocomplete="off">
+                            </div>
                         </div>
-                    </div>
-                    <div class="mb-3 row">
-                        <label class="col-sm-2 col-form-label">Terjual</label>
-                        <div class="col-lg-4">
-                            <input type="text" class="form-control" v-model="qty" placeholder="Total Terjual" autocomplete="off">
+                        <div class="mb-3 row">
+                            <label class="col-sm-2 col-form-label">Terjual</label>
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" v-model="qty" placeholder="Total Terjual" autocomplete="off">
+                            </div>
                         </div>
-                        <label class="col-sm-2 col-form-label">Stock Gudang : {{$gp->stock ?? '-'}}</label>
                     </div>
                     <div class="mb-3 row">
                         <div class="col-lg-2">
@@ -69,8 +69,8 @@
         data: {
             category: JSON.parse(`{!! $getProductCategories !!}`),
             product: JSON.parse(`{!! $getProduct !!}`),
-            categoryId: '0',
-            productId: '0',
+            categoryId: '',
+            productId: '',
             pay_amount: '',
             qty: '',
         },
