@@ -13,7 +13,7 @@
                 <div class="mb-3 row">
                     <label class="col-sm-2 col-form-label">Nama Produk</label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="name" placeholder="Nama Produk" value="{{$products->name}}">
+                        <input type="text" class="form-control" name="name" placeholder="Nama Produk" value="{{$products->name}}" autocomplete="off">
                     </div>
                 </div>
                 <div class="mb-3 row">
@@ -33,7 +33,7 @@
                         Ukuran
                     </label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="size" placeholder="Ukuran" value="{{$products->size}}">
+                        <input type="text" class="form-control" name="size" placeholder="Ukuran" value="{{$products->size}}" autocomplete="off">
                     </div>
                     <!-- <label class="col-sm-2 col-form-label">Harga Beli</label>
                     <div class="col-lg-4">
@@ -43,7 +43,7 @@
                 <div class="mb-3 row">
                     <label class="col-sm-2 col-form-label">Stok</label>
                     <div class="col-lg-4">
-                        <input type="number" class="form-control" name="stock" placeholder="Stok" value="{{$products->stock}}">
+                        <input type="number" class="form-control" name="stock" placeholder="Stok" value="{{$products->stock}}" autocomplete="off">
                     </div>
                     <!-- <label class="col-sm-2 col-form-label">Harga Jual</label>
                     <div class="col-lg-4">
