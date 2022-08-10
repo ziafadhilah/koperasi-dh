@@ -25,8 +25,8 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand me-2" href="https://mdbgo.com/">
-                <img src="{{URL::asset('images/logoDH.png')}}" height="50" alt="MDB Logo" loading="lazy" style="margin-top: -1px;" />
+            <a class="navbar-brand me-2" href="#">
+                <img src="{{URL::asset('images/logoDH.png')}}" height="50" alt="" loading="lazy" style="margin-top: -1px;" />
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

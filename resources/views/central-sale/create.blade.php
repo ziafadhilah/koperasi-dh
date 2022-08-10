@@ -1,5 +1,5 @@
 @extends('layouts/main')
-@section('title', 'Daftar Kategori')
+@section('title', 'Penjualan')
 @section('container')
 <div id="app">
     <div class="container mt-5">
@@ -33,13 +33,13 @@
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label">Harga Jual</label>
                             <div class="col-lg-4">
-                                <input type="text" class="form-control" v-model="pay_amount" placeholder="Harga Jual" autocomplete="off">
+                                <input type="number" class="form-control" v-model="pay_amount" placeholder="Harga Jual" autocomplete="off">
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label class="col-sm-2 col-form-label">Terjual</label>
                             <div class="col-lg-4">
-                                <input type="text" class="form-control" v-model="qty" placeholder="Total Terjual" autocomplete="off">
+                                <input type="number" class="form-control" v-model="qty" placeholder="Total Terjual" autocomplete="off">
                             </div>
                         </div>
                     </div>
@@ -113,7 +113,7 @@
                     });
             },
         }
-    })
+    });
 </script>
 
 @endsection

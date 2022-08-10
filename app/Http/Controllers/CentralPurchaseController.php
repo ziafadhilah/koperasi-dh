@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\CentralPurchase;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CentralPurchaseController extends Controller
 {
@@ -44,7 +46,40 @@ class CentralPurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            $centralPurchase = new CentralPurchase();
+            $centralPurchase->product_id = $request->product_id;
+            $centralPurchase->product_category_id = $request->product_category_id;
+            $centralPurchase->pay_amount = $request->pay_amount;
+            $centralPurchase->qty = $request->qty;
+            $centralPurchase->save();
+
+            $getProduct = Product::select('stock')->where('id', $centralPurchase->product_id)->get();
+            $finalData = $getProduct[0]->stock + ($request->qty);
+
+            $get_id = $centralPurchase->product_id;
+
+            $updateStock = Product::find($get_id);
+            $updateStock->stock = $finalData;
+            $updateStock->save();
+            DB::commit();
+            return redirect('/central-sale')->with(
+                'status',
+                'Data berhasil di tambahkan'
+            );
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json(
+                [
+                    'message' => 'Internal error',
+                    'code' => 500,
+                    'error' => true,
+                    'errors' => $e,
+                ],
+            );
+        }
     }
 
     /**

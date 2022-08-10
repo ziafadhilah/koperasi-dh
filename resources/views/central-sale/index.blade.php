@@ -12,6 +12,9 @@
         <a href="{{url('/central-sale/create')}}" class="btn btn-outline-success">
             <i class="fa fa-plus">&nbsp; Tambah Baru</i>
         </a>
+        <a href="{{url('/central-sale/export')}}" class="btn btn-outline-primary">
+            <i class="fa fa-file-excel">&nbsp; Export Excel</i>
+        </a>
     </div>
     <div class="table-responsive">
         <table class="table display" id="central-sale">

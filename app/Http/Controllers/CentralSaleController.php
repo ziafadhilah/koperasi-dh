@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CentralSaleExport;
 use App\Models\CentralSale;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CentralSaleController extends Controller
 {
@@ -31,7 +33,6 @@ class CentralSaleController extends Controller
     public function create()
     {
         $getProduct = Product::all();
-        // return $getProduct;
         $getProductCategories = ProductCategory::all();
         return view('/central-sale/create', [
             'getProduct' => $getProduct,
@@ -133,5 +134,11 @@ class CentralSaleController extends Controller
     {
         CentralSale::destroy($id->id);
         return redirect('/central-sale')->with('status', 'Data telah terhapus!');
+    }
+
+    public function export()
+    {
+        $centralSale = CentralSale::all();
+        return Excel::download(new CentralSaleExport, 'Rekapitulasi Penjualan.xlsx');
     }
 }

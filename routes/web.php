@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CentralPurchaseController;
 use App\Http\Controllers\CentralSaleController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
@@ -74,6 +75,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/', [CentralSaleController::class, 'store']);
         Route::patch('/{id}', [CentralSaleController::class, 'update']);
         Route::delete('/{id}', [CentralSaleController::class, 'destroy']);
+        Route::get('/export', [CentralSaleController::class, 'export']);
     });
 
     //Route Central Purchase
@@ -95,3 +97,5 @@ Route::prefix('/')->group(function () {
     // Route::post('/action/authenticate', [LoginController::class, 'authenticate']);
     // Route::get('/action/logout', [LoginController::class, 'logout']);
 });
+
+Route::get('/', [HomeController::class, 'index']);
