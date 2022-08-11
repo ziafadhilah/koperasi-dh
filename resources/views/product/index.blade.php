@@ -11,41 +11,43 @@
     <div class="mb-3">
         <a href="{{url('/product/create')}}" class="btn btn-outline-success"><i class="fa fa-plus">&nbsp; Tambah Baru</i></a>
     </div>
-    <table class="table table-striped mt-3" id="product_table">
-        <thead class="table-header">
-            <tr>
-                <th class="text-center" scope="col" width="5%">No</th>
-                <th class="text-center" scope="col">Kategori</th>
-                <th class="text-center" scope="col">Nama</th>
-                <th class="text-center" scope="col">Ukuran</th>
-                <th class="text-center" scope="col">Stok</th>
-                <th class="text-center" scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody class="text-center">
-            @foreach($products as $product)
-            <tr>
-                <th scope="row">{{$loop->iteration}}</th>
-                <td>{{$product->productCategory->name ?? '-'}}</td>
-                <td>{{$product->name ?? '-'}}</td>
-                <td>{{$product->size ?? '-'}}</td>
-                <td>{{$product->stock ?? '-'}}</td>
-                <!-- <td>{{number_format($product->purchase_price,0,',','.')}}</td>
+    <div class="table">
+        <table class="table table-striped table-hover mt-3" id="product_table">
+            <thead class="table-header">
+                <tr>
+                    <th class="text-center" scope="col" width="5%">No</th>
+                    <th class="text-center" scope="col">Kategori</th>
+                    <th class="text-center" scope="col">Nama</th>
+                    <th class="text-center" scope="col">Ukuran</th>
+                    <th class="text-center" scope="col">Stok</th>
+                    <th class="text-center" scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                @foreach($products as $product)
+                <tr>
+                    <th scope="row">{{$loop->iteration}}</th>
+                    <td>{{$product->productCategory->name ?? '-'}}</td>
+                    <td>{{$product->name ?? '-'}}</td>
+                    <td>{{$product->size ?? '-'}}</td>
+                    <td>{{$product->stock ?? '-'}}</td>
+                    <!-- <td>{{number_format($product->purchase_price,0,',','.')}}</td>
                 <td>{{number_format($product->selling_price,0,',','.')}}</td> -->
-                <td class="w-25">
-                    <a href="{{url('/product/show',$product->id)}}" class="btn btn-outline-primary btn-sm fa fa-eye"></a>
-                    <form action="/product/{{$product->id}}" method="post" class="d-inline">
-                        @method('delete')
-                        @csrf
-                        <button type="submit" class="btn btn-outline-danger btn-sm fa fa-trash" onclick="return confirm('Anda yakin ingin menghapus?')">
-                        </button>
-                    </form>
-                    <a href="{{url('/product/edit',$product->id)}}" class="btn btn-outline-warning btn-sm fa fa-edit d-inline"></a>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+                    <td class="w-25">
+                        <a href="{{url('/product/show',$product->id)}}" class="btn btn-outline-info btn-sm fa fa-eye"> Detail</a>
+                        <a href="{{url('/product/edit',$product->id)}}" class="btn btn-outline-warning btn-sm fa fa-edit d-inline"> Edit</a>
+                        <form action="/product/{{$product->id}}" method="post" class="d-inline">
+                            @method('delete')
+                            @csrf
+                            <button type="submit" class="btn btn-outline-danger btn-sm fa fa-trash-alt" onclick="return confirm('Anda yakin ingin menghapus?')"> Hapus
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
 @endsection
 <style>

@@ -39,14 +39,14 @@
                     <td>{{$cs->qty ?? '-'}}</td>
                     <td>{{date_format($cs->created_at ?? '-', 'd/M/Y')}}</td>
                     <td>
-                        <a href="{{url('/central-sale/show',$cs->id)}}" class="btn btn-outline-primary btn-sm fa fa-eye"></a>
+                        <a href="{{url('/central-sale/show',$cs->id)}}" class="btn btn-outline-info btn-sm fa fa-eye"> Detail</a>
+                        <a href="{{url('/central-sale/edit',$cs->id)}}" class="btn btn-outline-warning btn-sm fa fa-edit d-inline"> Edit</a>
                         <form action="/central-sale/{{$cs->id}}" method="post" class="d-inline">
                             @method('delete')
                             @csrf
-                            <button type="submit" class="btn btn-outline-danger btn-sm fa fa-trash" onclick="return confirm('Anda yakin ingin menghapus?')">
+                            <button type="submit" class="btn btn-outline-danger btn-sm fa fa-trash-alt" onclick="return confirm('Anda yakin ingin menghapus?')"> Hapus
                             </button>
                         </form>
-                        <a href="{{url('/central-sale/edit',$cs->id)}}" class="btn btn-outline-warning btn-sm fa fa-edit d-inline"></a>
                     </td>
                 </tr>
                 @endforeach

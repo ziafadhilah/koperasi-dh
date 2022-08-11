@@ -33,7 +33,7 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        return redirect()->to('/central-sale');
+        return redirect()->to('/product');
     }
 
     public function logout(Request $request)
@@ -44,6 +44,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/');
     }
 }

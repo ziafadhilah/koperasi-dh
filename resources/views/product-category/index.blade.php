@@ -27,16 +27,14 @@
                 <td>{{$category->code}}</td>
                 <td>{{$category->name}}</td>
                 <td class="w-25">
-                    <!-- Trigger modal -->
-                    <a href="{{url('/product-category/show',$category->id)}}" class="btn btn-outline-primary btn-sm fa fa-eye"></a>
-                    <!-- Close modal -->
+                    <!-- <a href="{{url('/product-category/show',$category->id)}}" class="btn btn-outline-primary btn-sm fa fa-eye"></a> -->
+                    <a href="{{url('/product-category/edit',$category->id)}}" class="btn btn-outline-info btn-sm fa fa-edit d-inline"> Edit</a>
                     <form action="/product-category/{{$category->id}}" method="post" class="d-inline">
                         @method('delete')
                         @csrf
-                        <button type="submit" class="btn btn-outline-danger btn-sm fa fa-trash" onclick="return confirm('Anda yakin mau menghapus?')">
+                        <button type="submit" class="btn btn-outline-danger btn-sm fa fa-trash-alt" onclick="return confirm('Anda yakin mau menghapus?')"> Delete
                         </button>
                     </form>
-                    <a href="{{url('/product-category/edit',$category->id)}}" class="btn btn-outline-warning btn-sm fa fa-edit d-inline"></a>
                 </td>
             </tr>
             @endforeach
