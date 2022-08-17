@@ -25,4 +25,9 @@ class Product extends Model
     {
         return $this->hasOne(CentralPurchase::class);
     }
+
+    public function returSale()
+    {
+        return $this->hasOne(ReturSale::class);
+    }
 }

@@ -20,4 +20,9 @@ class CentralSale extends Model
     {
         return $this->belongsTo(ProductCategory::class);
     }
+
+    public function returSale()
+    {
+        return $this->hasOne(ReturSale::class);
+    }
 }

@@ -6,10 +6,12 @@ use App\Exports\CentralSaleExport;
 use App\Models\CentralSale;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\ReturSale;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class CentralSaleController extends Controller
 {
@@ -105,11 +107,7 @@ class CentralSaleController extends Controller
      */
     public function edit($id)
     {
-        $centralSale = CentralSale::findOrFail($id);
-        return $centralSale;
-        return view('/central-sale', [
-            'centralSale' => $centralSale,
-        ]);
+        //code
     }
 
     /**
@@ -119,9 +117,9 @@ class CentralSaleController extends Controller
      * @param  \App\Models\CentralSale  $centralSale
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CentralSale $centralSale)
+    public function update(Request $request, $id)
     {
-        //
+        //code
     }
 
     /**
@@ -136,9 +134,94 @@ class CentralSaleController extends Controller
         return redirect('/central-sale')->with('status', 'Data telah terhapus!');
     }
 
-    public function export()
+    public function exportPdf()
     {
-        $centralSale = CentralSale::all();
-        return Excel::download(new CentralSaleExport, 'Rekapitulasi Penjualan.xlsx');
+        $centralSale = CentralSale::with('product', 'productCategory')->get();
+
+        $pdf = PDF::loadView('/central-sale/pdf', ['centralSale' => $centralSale]);
+        return $pdf->stream();
+    }
+
+    public function retur($id)
+    {
+        $returSale = CentralSale::findOrFail($id);
+        return view('/central-sale/retur', [
+            'returSale' => $returSale
+        ]);
+    }
+
+    public function returSale(Request $request, $id)
+    {
+        DB::beginTransaction();
+
+        try {
+
+            $statusActive = CentralSale::findOrFail($id);
+            $statusActive->status = 0;
+            $statusActive->save();
+
+            $retur = new ReturSale();
+            $retur->central_sale_id = $request->central_sale_id;
+            $retur->stock = $request->qty;
+            $retur->type = 'Retur Penjualan';
+            $retur->save();
+
+            $getProductId = $request->product_id;
+            $retur_qyt = $request->qty;
+            $product = Product::findOrFail($getProductId);
+            $stockdb = $product['stock'];
+            $int_stockdb = (int)$stockdb;
+            $product->stock = $int_stockdb + $retur_qyt;
+            $product->save();
+
+            DB::commit();
+            return redirect('/central-sale')->with(
+                'status',
+                'Retur Berhasil'
+            );
+        } catch (Exception $e) {
+            DB::rollback();
+            return response()->json(
+                [
+                    'message' => 'Internal error',
+                    'code' => 500,
+                    'error' => true,
+                    'errors' => $e,
+                ],
+            );
+        }
+        // try {
+        //     $statusActive = CentralSale::findOrFail($id);
+        //     $statusActive->status = 0;
+        //     $statusActive->save();
+
+        //     $retur = new ReturSale();
+        //     $retur->central_sale_id = $request->id;
+        //     $retur->stock = $request->stock;
+        //     $retur->type = $request->status;
+        //     $retur->save();
+
+        //     $getProductId = $request->product_id;
+        //     $getStock = Product::select('stock')->where('id', $getProductId);
+        //     $product = Product::findOrFail($getProductId);
+        //     $product->stock = $getStock + $request->stock;
+        //     $product->save();
+
+        //     DB::commit();
+        //     return redirect('/central-sale')->with(
+        //         'status',
+        //         'Data berhasil di tambahkan'
+        //     );
+        // } catch (Exception $e) {
+        //     DB::rollback();
+        //     return response()->json(
+        //         [
+        //             'message' => 'Internal error',
+        //             'code' => 500,
+        //             'error' => true,
+        //             'errors' => $e,
+        //         ],
+        //     );
+        // }
     }
 }

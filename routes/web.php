@@ -71,11 +71,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [CentralSaleController::class, 'index']);
         Route::get('/show/{id}', [CentralSaleController::class, 'show']);
         Route::get('/create', [CentralSaleController::class, 'create']);
-        Route::get('/edit/{id}', [CentralSaleController::class, 'edit']);
+        Route::get('/retur/{id}', [CentralSaleController::class, 'retur']);
+        Route::post('/{id}', [CentralSaleController::class, 'returSale']);
         Route::post('/', [CentralSaleController::class, 'store']);
-        Route::patch('/{id}', [CentralSaleController::class, 'update']);
         Route::delete('/{id}', [CentralSaleController::class, 'destroy']);
-        Route::get('/export', [CentralSaleController::class, 'export']);
+        Route::get('/export-pdf', [CentralSaleController::class, 'exportPdf']);
     });
 
     //Route Central Purchase
@@ -83,7 +83,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [CentralPurchaseController::class, 'index']);
         Route::get('/show/{id}', [CentralPurchaseController::class, 'show']);
         Route::get('/create', [CentralPurchaseController::class, 'create']);
-        Route::get('/edit/{id}', [CentralPurchaseController::class, 'edit']);
+        Route::get('/retur/{id}', [CentralPurchaseController::class, 'returPurchase']);
         Route::post('/', [CentralPurchaseController::class, 'store']);
         Route::patch('/{id}', [CentralPurchaseController::class, 'update']);
         Route::delete('/{id}', [CentralPurchaseController::class, 'destroy']);

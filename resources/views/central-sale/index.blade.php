@@ -12,8 +12,11 @@
         <a href="{{url('/central-sale/create')}}" class="btn btn-outline-success">
             <i class="fa fa-plus">&nbsp; Tambah Baru</i>
         </a>
-        <a href="{{url('/central-sale/export')}}" class="btn btn-outline-primary">
+        <!-- <a href="{{url('/central-sale/export')}}" class="btn btn-outline-primary">
             <i class="fa fa-file-excel">&nbsp; Export Excel</i>
+        </a> -->
+        <a href="{{url('/central-sale/export-pdf')}}" class="btn btn-outline-danger" target="_blank">
+            <i class="fa fa-file-pdf">&nbsp; Export PDF</i>
         </a>
     </div>
     <div class="table-responsive">
@@ -24,6 +27,7 @@
                     <th class="text-center" scope="col">Kategori</th>
                     <th class="text-center" scope="col">Produk</th>
                     <th class="text-center" scope="col">Ukuran</th>
+                    <th class="text-center" scope="col">Harga Jual</th>
                     <th class="text-center" scope="col">Total Terjual</th>
                     <th class="text-center" scope="col">Tanggal Terjual</th>
                     <th class="text-center" scope="col">Action</th>
@@ -36,11 +40,12 @@
                     <td>{{$cs->productCategory->name ?? '-'}}</td>
                     <td>{{$cs->product->name ?? '-'}}</td>
                     <td>{{$cs->product->size ?? '-'}}</td>
+                    <td>{{$cs->pay_amount ?? '-'}}</td>
                     <td>{{$cs->qty ?? '-'}}</td>
                     <td>{{date_format($cs->created_at ?? '-', 'd/M/Y')}}</td>
                     <td>
                         <a href="{{url('/central-sale/show',$cs->id)}}" class="btn btn-outline-info btn-sm fa fa-eye"> Detail</a>
-                        <a href="{{url('/central-sale/edit',$cs->id)}}" class="btn btn-outline-warning btn-sm fa fa-edit d-inline"> Edit</a>
+                        <a href="{{url('/central-sale/retur',$cs->id)}}" class="btn btn-outline-warning btn-sm fa fa-arrow-right d-inline"> Retur</a>
                         <form action="/central-sale/{{$cs->id}}" method="post" class="d-inline">
                             @method('delete')
                             @csrf
