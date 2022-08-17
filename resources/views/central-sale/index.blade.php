@@ -28,8 +28,9 @@
                     <th class="text-center" scope="col">Produk</th>
                     <th class="text-center" scope="col">Ukuran</th>
                     <th class="text-center" scope="col">Harga Jual</th>
-                    <th class="text-center" scope="col">Total Terjual</th>
+                    <th class="text-center" scope="col" style="width: 20px;">Terjual</th>
                     <th class="text-center" scope="col">Tanggal Terjual</th>
+                    <th class="text-center" scope="col" style="width: 100px;">Status Retur</th>
                     <th class="text-center" scope="col">Action</th>
                 </tr>
             </thead>
@@ -40,9 +41,16 @@
                     <td>{{$cs->productCategory->name ?? '-'}}</td>
                     <td>{{$cs->product->name ?? '-'}}</td>
                     <td>{{$cs->product->size ?? '-'}}</td>
-                    <td>{{$cs->pay_amount ?? '-'}}</td>
-                    <td>{{$cs->qty ?? '-'}}</td>
+                    <td>Rp. {{number_format($cs->pay_amount ?? '-')}}</td>
+                    <td>{{$cs->qty ?? '-'}}pcs</td>
                     <td>{{date_format($cs->created_at ?? '-', 'd/M/Y')}}</td>
+                    <td>
+                        @if($cs->status == 0)
+                        Di Retur
+                        @else
+                        Tidak di Retur
+                        @endif
+                    </td>
                     <td>
                         <a href="{{url('/central-sale/show',$cs->id)}}" class="btn btn-outline-info btn-sm fa fa-eye"> Detail</a>
                         <a href="{{url('/central-sale/retur',$cs->id)}}" class="btn btn-outline-warning btn-sm fa fa-arrow-right d-inline"> Retur</a>

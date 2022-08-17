@@ -142,6 +142,8 @@ class CentralSaleController extends Controller
         return $pdf->stream();
     }
 
+
+
     public function retur($id)
     {
         $returSale = CentralSale::findOrFail($id);
@@ -190,38 +192,5 @@ class CentralSaleController extends Controller
                 ],
             );
         }
-        // try {
-        //     $statusActive = CentralSale::findOrFail($id);
-        //     $statusActive->status = 0;
-        //     $statusActive->save();
-
-        //     $retur = new ReturSale();
-        //     $retur->central_sale_id = $request->id;
-        //     $retur->stock = $request->stock;
-        //     $retur->type = $request->status;
-        //     $retur->save();
-
-        //     $getProductId = $request->product_id;
-        //     $getStock = Product::select('stock')->where('id', $getProductId);
-        //     $product = Product::findOrFail($getProductId);
-        //     $product->stock = $getStock + $request->stock;
-        //     $product->save();
-
-        //     DB::commit();
-        //     return redirect('/central-sale')->with(
-        //         'status',
-        //         'Data berhasil di tambahkan'
-        //     );
-        // } catch (Exception $e) {
-        //     DB::rollback();
-        //     return response()->json(
-        //         [
-        //             'message' => 'Internal error',
-        //             'code' => 500,
-        //             'error' => true,
-        //             'errors' => $e,
-        //         ],
-        //     );
-        // }
     }
 }
