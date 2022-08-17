@@ -53,7 +53,9 @@
                     </td>
                     <td>
                         <a href="{{url('/central-sale/show',$cs->id)}}" class="btn btn-outline-info btn-sm fa fa-eye"> Detail</a>
+                        @if($cs->status == 1)
                         <a href="{{url('/central-sale/retur',$cs->id)}}" class="btn btn-outline-warning btn-sm fa fa-arrow-right d-inline"> Retur</a>
+                        @endif
                         <form action="/central-sale/{{$cs->id}}" method="post" class="d-inline">
                             @method('delete')
                             @csrf
