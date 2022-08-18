@@ -147,6 +147,7 @@ class CentralSaleController extends Controller
     public function retur($id)
     {
         $returSale = CentralSale::findOrFail($id);
+        return $returSale;
         return view('/central-sale/retur', [
             'returSale' => $returSale
         ]);
